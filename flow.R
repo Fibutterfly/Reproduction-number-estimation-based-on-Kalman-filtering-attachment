@@ -135,27 +135,27 @@ setGeneric("KalmanPlots", function(x) standardGeneric("KalmanPlots"))
 setMethod("KalmanPlots","Flow", function(x) {
   world_data <- x@KF@dataset[x@KF@dataset$`Country/Region`=="World",]
   world_plot <- standardPlot(world_data,"Date","R","se_R",
-               "A világ reprodukciós rátája Kálmán Filterrel",
+               "A világ reprodukciós rátája Kálmán-szűrővel",
                "Dátum",
                "R")
   print(world_plot)
   
   China_data <- x@KF@dataset[x@KF@dataset$`Country/Region`=="China",]
   China_plot <- standardPlot(China_data,"Date","R","se_R",
-                             "Kína reprodukciós rátája Kálmán Filterrel",
+                             "Kína reprodukciós rátája Kálmán-szűrővel",
                              "Dátum",
                              "R")
   print(China_plot)
   
   Croatia_data <- x@KF@dataset[x@KF@dataset$`Country/Region`=="Croatia",]
   Croatia_plot <- standardPlot(Croatia_data,"Date","R","se_R",
-                             "Horvátország reprodukciós rátája Kálmán Filterrel",
+                             "Horvátország reprodukciós rátája Kálmán-szűrővel",
                              "Dátum",
                              "R")
   print(Croatia_plot)
   US_data <- x@KF@dataset[x@KF@dataset$`Country/Region`=="US",]
   US_plot <- standardPlot(US_data,"Date","R","se_R",
-                               "Egyesült Államok reprodukciós rátája Kálmán Filterrel",
+                               "Egyesült Államok reprodukciós rátája Kálmán-szűrővel",
                                "Dátum",
                                "R")
   print(US_plot)
@@ -186,27 +186,27 @@ setMethod("BayesianPlots","Flow", function(x) {
   date_filtered <- x@Bayesian[,]
   world_data <- date_filtered[date_filtered$`Country/Region`=="World",]
   world_plot <- bayesianPlot(world_data,"Date","R","ci_95_l","ci_95_u",
-                             "A világ reprodukciós rátája Bayesian Filterrel",
+                             "A világ reprodukciós rátája Bayesian-szűrővel",
                              "Dátum",
                              "R")
   print(world_plot)
   
   China_data <- date_filtered[date_filtered$`Country/Region`=="China",]
   China_plot <- bayesianPlot(China_data,"Date","R","ci_95_l","ci_95_u",
-                             "Kína reprodukciós rátája Bayesian Filterrel",
+                             "Kína reprodukciós rátája Bayesian-szűrővel",
                              "Dátum",
                              "R")
   print(China_plot)
   
   Croatia_data <- date_filtered[date_filtered$`Country/Region`=="Croatia",]
   Croatia_plot <- bayesianPlot(Croatia_data,"Date","R","ci_95_l","ci_95_u",
-                               "Horvátország reprodukciós rátája Bayesian Filterrel",
+                               "Horvátország reprodukciós rátája Bayesian-szűrővel",
                                "Dátum",
                                "R")
   print(Croatia_plot)
   US_data <- date_filtered[date_filtered$`Country/Region`=="US",]
   US_plot <- bayesianPlot(US_data,"Date","R","ci_95_l","ci_95_u",
-                          "Egyesült Államok reprodukciós rátája Bayesian Filterrel",
+                          "Egyesült Államok reprodukciós rátája Bayesian-szűrővel",
                           "Dátum",
                           "R")
   print(US_plot)
@@ -218,35 +218,35 @@ source("R/plots.R")
 setGeneric("KalmanVsBayesPlots", function(x) standardGeneric("KalmanVsBayesPlots"))
 setMethod("KalmanVsBayesPlots","Flow", function(x) {
   temp_world <- datasetGenForVsPlot(wrk_flow@KF@dataset, wrk_flow@Bayesian,
-                                    "Country/Region","World", "Filter", "Kálmán"
+                                    "Country/Region","World", "Szűrő", "Kálmán"
                                     ,"Bayesian",c("Date","R"))
   temp_china <- datasetGenForVsPlot(wrk_flow@KF@dataset, wrk_flow@Bayesian,
-                                    "Country/Region","China", "Filter", "Kálmán"
+                                    "Country/Region","China", "Szűrő", "Kálmán"
                                     ,"Bayesian",c("Date","R"))
   temp_croatia <- datasetGenForVsPlot(wrk_flow@KF@dataset, wrk_flow@Bayesian,
-                                      "Country/Region","Croatia","Filter",
+                                      "Country/Region","Croatia","Szűrő",
                                       "Kálmán","Bayesian",c("Date","R"))
   temp_us <- datasetGenForVsPlot(wrk_flow@KF@dataset, wrk_flow@Bayesian,
-                                      "Country/Region","US","Filter",
+                                      "Country/Region","US","Szűrő",
                                       "Kálmán","Bayesian",c("Date","R"))
   
   world_plot <- genVsPlots(temp_world,x_key = "Date", y_key = "R"
-                           , group_key = "Filter",
-in_title = "A világ reprodukciós rátája Kálmán - és Bayesian - Filterrel",
+                           , group_key = "Szűrő",
+in_title = "A világ reprodukciós rátája Kálmán - és Bayesian - szűrővel",
 in_x_label = "Dátum", in_y_label = "R")
   china_plot <- genVsPlots(temp_china,x_key = "Date", y_key = "R"
-                           , group_key = "Filter",
-in_title = "Kína reprodukciós rátája Kálmán - és Bayesian - Filterrel",
+                           , group_key = "Szűrő",
+in_title = "Kína reprodukciós rátája Kálmán - és Bayesian - szűrővel",
                            in_x_label = "Dátum", in_y_label = "R")
 
   croatia_plot <- genVsPlots(temp_croatia,x_key = "Date", y_key = "R"
-                           , group_key = "Filter",
-in_title = "Horvátor. reprodukciós rátája Kálmán - és Bayesian - Filterrel",
+                           , group_key = "Szűrő",
+in_title = "Horvátor. reprodukciós rátája Kálmán - és Bayesian - szűrővel",
                            in_x_label = "Dátum", in_y_label = "R")  
   
   us_plot <- genVsPlots(temp_us,x_key = "Date", y_key = "R"
-                             , group_key = "Filter",
- in_title = "USA reprodukciós rátája Kálmán - és Bayesian - Filterrel",
+                             , group_key = "Szűrő",
+ in_title = "USA reprodukciós rátája Kálmán - és Bayesian - szűrővel",
                              in_x_label = "Dátum", in_y_label = "R")  
   print(world_plot)
   print(china_plot)
@@ -325,34 +325,34 @@ setMethod("estimVsKalman","Flow", function(x) {
   temp_complex <- rbind(temp_world,temp_china,temp_croatia, temp_us)
   
   temp_world <- datasetGenForVsPlot(wrk_flow@KF@dataset, temp_complex,
-                                    "Country/Region","World", "Filter", "Kálmán"
+                                    "Country/Region","World", "Módszer", "Kálmán-szűrő"
                                     ,"Cori",c("Date","R"))
   temp_china <- datasetGenForVsPlot(wrk_flow@KF@dataset, temp_complex,
-                                    "Country/Region","China", "Filter", "Kálmán"
+                                    "Country/Region","China", "Módszer", "Kálmán-szűrő"
                                     ,"Cori",c("Date","R"))
   temp_croatia <- datasetGenForVsPlot(wrk_flow@KF@dataset, temp_complex,
-                                      "Country/Region","Croatia","Filter",
-                                      "Kálmán","Cori",c("Date","R"))
+                                      "Country/Region","Croatia","Módszer",
+                                      "Kálmán-szűrő","Cori",c("Date","R"))
   temp_us <- datasetGenForVsPlot(wrk_flow@KF@dataset, temp_complex,
-                                 "Country/Region","US","Filter",
-                                 "Kálmán","Cori",c("Date","R"))
+                                 "Country/Region","US","Módszer",
+                                 "Kálmán-szűrő","Cori",c("Date","R"))
   world_plot <- genVsPlots(temp_world,x_key = "Date", y_key = "R"
-                           , group_key = "Filter",
-      in_title = "A világ reprodukciós rátája Kálmán Filterrel és Cori módszerrel",
+                           , group_key = "Módszer",
+      in_title = "A világ reprodukciós rátája Kálmán-szűrővel és Cori módszerrel",
     in_x_label = "Dátum", in_y_label = "R")
   china_plot <- genVsPlots(temp_china,x_key = "Date", y_key = "R"
-                         , group_key = "Filter",
-       in_title = "Kína reprodukciós rátája Kálmán Filterrel és Cori módszerrel",
+                         , group_key = "Módszer",
+       in_title = "Kína reprodukciós rátája Kálmán-szűrővel és Cori módszerrel",
                          in_x_label = "Dátum", in_y_label = "R")
 
   croatia_plot <- genVsPlots(temp_croatia,x_key = "Date", y_key = "R"
-                           , group_key = "Filter",
-   in_title = "Horvátor. reprodukciós rátája Kálmán Filterrel és Cori módszerrel",
+                           , group_key = "Módszer",
+   in_title = "Horvátor. reprodukciós rátája Kálmán-szűrővel és Cori módszerrel",
                            in_x_label = "Dátum", in_y_label = "R")  
 
   us_plot <- genVsPlots(temp_us,x_key = "Date", y_key = "R"
-                      , group_key = "Filter",
-      in_title = "USA reprodukciós rátája Kálmán Filterrel és Cori módszerrel",
+                      , group_key = "Módszer",
+      in_title = "USA reprodukciós rátája Kálmán-szűrővel és Cori módszerrel",
                       in_x_label = "Dátum", in_y_label = "R")  
   print(world_plot)
   print(china_plot)
